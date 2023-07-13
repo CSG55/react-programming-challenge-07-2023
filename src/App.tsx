@@ -63,6 +63,12 @@ export function App() {
           onChange={async (newValue) => {
             if (newValue === null) {
               return
+            } else if (newValue && newValue.id === ''){
+              // Bug #3
+              // The user selected "All Employees", which is represented by an empty string.
+              // I would recommend using a better flag to signify an empty employee more clearly, like "-1".
+              // An empty string is not obvious and will lead to bugs.
+              return await loadAllTransactions()
             }
 
             await loadTransactionsByEmployee(newValue.id)
@@ -77,7 +83,11 @@ export function App() {
           {transactions !== null && (
             <button
               className="RampButton"
-              disabled={paginatedTransactionsUtils.loading}
+              // Bug #2
+              // View More button was not checking the existence of a next page,
+              // as provided by the hook providing paginatedTransactions.
+              // We now refer to the existence of a next page to disable the View More button.
+              disabled={paginatedTransactionsUtils.loading || paginatedTransactions?.nextPage===null }
               onClick={async () => {
                 await loadAllTransactions()
               }}

@@ -1,12 +1,24 @@
 # Instructions
 
-Welcome to Ramp's frontend interview challenge.
-
 In this challenge, you will need to fix certain bugs within the starter code provided to you.
 
 The bugs **do not depend on each other**, so you can solve them independently.
 
 You will submit a CodeSandbox link with your response.
+
+**Bug #1** - The input component was never being rendered and therefore was not selectable.
+Since the intention is to style the input component, we can simply move the classname to the input
+
+**Bug #2**
+View More button was not checking the existence of a next page,
+as provided by the hook providing paginatedTransactions.
+We now refer to the existence of a next page to disable the View More button.
+
+**Bug #3**
+The user selected "All Employees", which is represented by an empty string.
+I would recommend using a better flag to signify an empty employee more clearly, like "-1".
+An empty string is not obvious and will lead to bugs.
+
 
 ### Prerequisites
 
